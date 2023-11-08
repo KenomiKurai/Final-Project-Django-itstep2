@@ -1,0 +1,48 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+<h1>Оформление заказа</h1>
+<table>
+    <tbody>
+    {% if selected_post %}
+    <tr>
+        <div class="row">
+            <div class="col-md-4">
+                <br>
+                <h1>price: {{ selected_post.price }}</h1>
+                <h2>Title:{{selected_post.title}}</h2>
+                <h3>creator:{{ selected_post.user }}</h3>
+            </div>
+            <div class="col-md-8">
+                <hr>
+                <img src="{{selected_post.image.url}}" alt="product image" style="max-width: 200px; max-height: 200px;">
+                {% else %}
+                <h1>заказов нет</h1>
+            </div>
+            <hr>
+        </div>
+    </tr>
+    {% endif %}
+    </tbody>
+</table>
+<hr>
+{% if user_credit_card %}
+    <h2>Ваша кредитная карта:</h2>
+    <p>Номер карты: **** **** **** {{ user_credit_card.card_number|slice:"-4" }}</p>
+    <!-- Другие детали карты -->
+<a href="{% url 'edit_credit_card' %}">изменить карту</a>
+ <br>
+
+  <form method="post">
+    {% csrf_token %}
+    <a href="{% url 'buy_completed' %}"  class="btn btn-primary">завершить покупку</a>
+</form>
+{% else %}
+    <p>Для оформления заказа необходимо добавить кредитную карту.</p>
+    <a href="{% url 'add_credit_card' %}">Добавить кредитную карту</a>
+{% endif %}
+
+{% endblock %}

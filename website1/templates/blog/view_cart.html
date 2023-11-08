@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+<table>
+    <tbody>
+    {% if selected_post %}
+    <tr>
+        <div class="row">
+            <div class="col-md-4">
+                <br>
+                <h1>price: {{ selected_post.price }}</h1>
+                <h2>Title:{{selected_post.title}}</h2>
+                <h3>creator:{{ selected_post.user }}</h3>
+            </div>
+            <div class="col-md-8">
+                <hr>
+                <img src="{{selected_post.image.url}}" alt="product image" style="max-width: 200px; max-height: 200px;">
+                {% else %}
+                <H1>корзина пуста</H1>
+            </div>
+            <hr>
+        </div>
+    </tr>
+
+    {% endif %}
+    </tbody>
+</table>
+
+
+<a href="{% url 'checkout' %}" class="btn btn-primary">Оформить заказ</a>
+{% endblock %}

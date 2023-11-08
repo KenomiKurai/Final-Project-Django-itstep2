@@ -1,0 +1,12 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+<h1>Добавление кредитной карты</h1>
+<form method="post" action="{% url 'add_credit_card' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить карту</button>
+</form>
+
+
+{% endblock %}

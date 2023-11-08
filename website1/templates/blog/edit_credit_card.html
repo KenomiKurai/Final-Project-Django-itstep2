@@ -1,0 +1,14 @@
+{% extends "blog/base.html" %}
+{% load static %}
+{% block content %}
+
+<h1>Редактирование данных кредитной карты</h1>
+<form method="post" action="{% url 'edit_credit_card' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить изменения</button>
+</form>
+
+
+
+{% endblock %}
